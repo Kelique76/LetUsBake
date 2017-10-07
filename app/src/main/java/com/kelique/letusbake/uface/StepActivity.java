@@ -43,6 +43,7 @@ public class StepActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_step_viewpager);
 
         final ArrayList<Step> stepList = getIntent().getExtras().getParcelableArrayList(BUNDLE_STEP_DATA);

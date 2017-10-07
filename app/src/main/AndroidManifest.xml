@@ -18,10 +18,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".uface.RecipeDetailActivity">
+        <activity android:name=".uface.RecipeDetailActivity"
+            android:parentActivityName=".uface.MainActivity"
+            >
         </activity>
-        <activity android:name=".uface.StepActivity">
-        </activity>
+        <activity android:name=".uface.StepActivity"
+            android:parentActivityName=".uface.MainActivity"/>
+
 
         <receiver android:name=".widget.RecipeWidgetProvider">
             <intent-filter>

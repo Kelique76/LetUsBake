@@ -30,7 +30,7 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masterdetail);
-
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_container);
         Recipe recipe = getIntent().getExtras().getParcelable(BUNDLE_RECIPE_DATA);

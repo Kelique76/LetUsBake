@@ -192,9 +192,10 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
             releasePlayer();
         }
     }
-
+//Note: here edited
     private void releasePlayer() {
         if(mExoPlayer!=null) {
+//            currentWindows = mExoPlayer.getCurrentPosition();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -248,14 +249,16 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
+
 //        outState.putInt(StepActivity.);
         super.onSaveInstanceState(outState);
-        long currentWindows =  mExoPlayer.getCurrentPosition();
-        currentWindows = mExoPlayer.getCurrentWindowIndex();
+//        outState.putLong("PLAYER POST", currentWindows);
+//        long currentWindows =  mExoPlayer.getCurrentPosition();
+//        currentWindows = mExoPlayer.getCurrentWindowIndex();
 //        boolean curr = mExoPlayer.getPlayWhenReady();
 //        onPlayerStateChanged(true, initializePlayer(););
-        releasePlayer();
-        mExoPlayer = null;
+//        releasePlayer();
+//        mExoPlayer = null;
 //        outState.putString("test", "levov");
 //        Log.d("Coba", "");
 
