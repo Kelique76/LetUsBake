@@ -47,6 +47,9 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     private SimpleExoPlayer mExoPlayer;
     private MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
+    int currentWindows = 0;
+    boolean playWhenReady = false;
+    long mPlBack = 0;
 
     public static StepFragment newInstance(Step step) {
         Bundle bundle = new Bundle();
@@ -68,6 +71,14 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+        if(savedInstanceState!=null){
+            currentWindows = savedInstanceState.getInt("PlayerPlay");
+            playWhenReady = savedInstanceState.getBoolean("PloyBoll");
+            mPlBack = savedInstanceState.getLong("PlayLong");
+        }
+
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_step, container, false);
         final View view = binding.getRoot();
@@ -100,10 +111,6 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
             }
         }
 
-        if(savedInstanceState!=null){
-//            Log.d("Coba", "");
-            mStep = savedInstanceState.getParcelable(BUNDLE_STEP_DATA);
-        }
 
         return view;
     }
@@ -173,7 +180,8 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
-            mExoPlayer.setPlayWhenReady(true);
+            mExoPlayer.setPlayWhenReady(playWhenReady);
+            mExoPlayer.seekTo(currentWindows, mPlBack);
         }
     }
 
@@ -195,7 +203,11 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 //Note: here edited
     private void releasePlayer() {
         if(mExoPlayer!=null) {
-//            currentWindows = mExoPlayer.getCurrentPosition();
+
+//
+        currentWindows = mExoPlayer.getCurrentWindowIndex();
+        playWhenReady = mExoPlayer.getPlayWhenReady();
+        mPlBack = mExoPlayer.getCurrentPosition();
             mExoPlayer.stop();
             mExoPlayer.release();
             mExoPlayer = null;
@@ -252,15 +264,10 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
 
 //        outState.putInt(StepActivity.);
         super.onSaveInstanceState(outState);
-//        outState.putLong("PLAYER POST", currentWindows);
-//        long currentWindows =  mExoPlayer.getCurrentPosition();
-//        currentWindows = mExoPlayer.getCurrentWindowIndex();
-//        boolean curr = mExoPlayer.getPlayWhenReady();
-//        onPlayerStateChanged(true, initializePlayer(););
-//        releasePlayer();
-//        mExoPlayer = null;
-//        outState.putString("test", "levov");
-//        Log.d("Coba", "");
+
+        outState.putLong("PlayerPlay", currentWindows);
+        outState.putBoolean("PloyBoll", playWhenReady);
+        outState.putLong("PlayLong", mPlBack);
 
     }
 }

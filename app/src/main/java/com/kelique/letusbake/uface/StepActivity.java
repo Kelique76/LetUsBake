@@ -11,12 +11,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.kelique.letusbake.R;
 import com.kelique.letusbake.databinding.ActivityStepViewpagerBinding;
-import com.kelique.letusbake.uface.fragment.StepFragment;
 import com.kelique.letusbake.model.Step;
+import com.kelique.letusbake.uface.fragment.StepFragment;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,15 @@ public class StepActivity extends AppCompatActivity {
 
     private ActivityStepViewpagerBinding binding;
 
+
+    //enabling backpress on Navigation Up
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+
+    }
+
     public static Intent newIntent(Context packageContext, ArrayList<Step> stepList,
                                    int currentStep, String recipeName) {
         Intent intent = new Intent(packageContext, StepActivity.class);
@@ -43,8 +53,15 @@ public class StepActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_step_viewpager);
+
+        //to call actionbar and show it in menu
+        Toolbar toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final ArrayList<Step> stepList = getIntent().getExtras().getParcelableArrayList(BUNDLE_STEP_DATA);
         final int currentStep = getIntent().getExtras().getInt(BUNDLE_CURRENT_STEP);

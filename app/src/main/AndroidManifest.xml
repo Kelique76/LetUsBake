@@ -21,9 +21,12 @@
         <activity android:name=".uface.RecipeDetailActivity"
             android:parentActivityName=".uface.MainActivity"
             >
+
         </activity>
         <activity android:name=".uface.StepActivity"
-            android:parentActivityName=".uface.MainActivity"/>
+            android:parentActivityName=".uface.RecipeDetailActivity">
+
+        </activity>
 
 
         <receiver android:name=".widget.RecipeWidgetProvider">

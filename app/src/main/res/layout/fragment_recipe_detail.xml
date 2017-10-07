@@ -2,9 +2,30 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<include-->
+        <!--android:id="@+id/tb_toolbar"-->
+        <!--layout="@layout/toolbar"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"/>-->
+
+    <!--<android.support.design.widget.TabLayout-->
+        <!--android:id="@+id/tl_activity_step_viewpager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="?attr/colorPrimary"-->
+        <!--android:elevation="6dp"-->
+        <!--android:minHeight="?attr/actionBarSize"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tb_toolbar"/>-->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
