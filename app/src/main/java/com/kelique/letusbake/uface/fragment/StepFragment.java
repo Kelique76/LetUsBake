@@ -196,10 +196,10 @@ public class StepFragment extends Fragment implements ExoPlayer.EventListener {
     @Override
     public void onStop() {
         super.onStop();
-        if (Util.SDK_INT > 23) {
+//        if (Util.SDK_INT > 23) {
             releasePlayer();
         }
-    }
+//    }
 //Note: here edited
     private void releasePlayer() {
         if(mExoPlayer!=null) {

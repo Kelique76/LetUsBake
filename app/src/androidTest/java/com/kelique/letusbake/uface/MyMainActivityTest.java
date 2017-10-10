@@ -22,7 +22,6 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -37,7 +36,7 @@ public class MyMainActivityTest {
     @Test
     public void myMainActivityTest() {
         try {
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -52,9 +51,7 @@ public class MyMainActivityTest {
                 withId(R.id.recipe_detail_steps_recycler_view));
         recyclerView2.perform(actionOnItemAtPosition(0, click()));
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.exo_pause), withContentDescription("Pause"), isDisplayed()));
-        appCompatImageButton.perform(click());
+
 
         ViewInteraction appCompatTextView = onView(
                 allOf(withText("Step: 2"), isDisplayed()));
@@ -64,9 +61,6 @@ public class MyMainActivityTest {
                 allOf(withText("Step: 3"), isDisplayed()));
         appCompatTextView2.perform(click());
 
-        ViewInteraction appCompatImageButton2 = onView(
-                allOf(withId(R.id.exo_pause), withContentDescription("Pause"), isDisplayed()));
-        appCompatImageButton2.perform(click());
 
         ViewInteraction appCompatTextView3 = onView(
                 allOf(withText("Step: 4"), isDisplayed()));

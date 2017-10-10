@@ -17,15 +17,20 @@ import com.kelique.letusbake.uface.presenter.RecipeDetailPresenter;
 
 import java.util.ArrayList;
 
+
 public class RecipeDetailActivity extends AppCompatActivity implements RecipeDetailPresenter.Callbacks {
     private static final String BUNDLE_RECIPE_DATA =
             "com.kelique.letusbake.recipe_data";
+    boolean masterDetail = false;
 
     public static Intent newIntent(Context packageContext, Recipe recipe) {
         Intent intent = new Intent(packageContext, RecipeDetailActivity.class);
         intent.putExtra(BUNDLE_RECIPE_DATA, recipe);
         return intent;
     }
+
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -38,31 +43,35 @@ public class RecipeDetailActivity extends AppCompatActivity implements RecipeDet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_masterdetail);
-//        getActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-
-
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-        Recipe recipe = getIntent().getExtras().getParcelable(BUNDLE_RECIPE_DATA);
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.tb_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if (fragment == null) {
-            fragment = RecipeDetailFragment.newInstance(recipe);
-            fm.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
+             if (findViewById(R.id.detail_fragment_container) !=null)   {
+                 masterDetail = true;
+             }    else{
+                 masterDetail = false;
+             }
 
-            if (getResources().getBoolean(R.bool.isTablet)) {
-                Fragment newDetail = StepFragment.newInstance(recipe.getSteps().get(0));
-                getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.detail_fragment_container, newDetail)
-                    .commit();
+        if (savedInstanceState != null) {
+            FragmentManager fm = getSupportFragmentManager();
+            Fragment fragment = fm.findFragmentById(R.id.fragment_container);
+            Recipe recipe = getIntent().getExtras().getParcelable(BUNDLE_RECIPE_DATA);
+
+            if (fragment == null) {
+                fragment = RecipeDetailFragment.newInstance(recipe);
+                fm.beginTransaction()
+                        .add(R.id.fragment_container, fragment)
+                        .commit();
+
+                if (masterDetail) {
+                    Fragment newDetail = StepFragment.newInstance(recipe.getSteps().get(0));
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.detail_fragment_container, newDetail)
+                            .commit();
+                }
+
             }
         }
     }
